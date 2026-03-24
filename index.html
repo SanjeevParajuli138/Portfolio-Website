@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjeev | Soft Dark Portfolio</title>
+    <!-- New Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Background Ambient Orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <!-- Redesigned Appealing Loader -->
+    <div class="loader-overlay" id="loader">
+        <div class="loader-content">
+            <div class="loader-ring-wrapper">
+                <svg class="progress-ring" width="160" height="160">
+                    <circle class="ring-bg" stroke-width="6" fill="transparent" r="74" cx="80" cy="80" />
+                    <circle id="progress-active" class="ring-progress" stroke-width="6" fill="transparent" r="74"
+                        cx="80" cy="80" stroke-linecap="round" />
+                </svg>
+                <div class="loader-percent" id="loader-percent">0</div>
+            </div>
+            <div class="loader-text">Initializing Workspace</div>
+        </div>
+    </div>
+
+    <!-- Ambient Glass Timeline Navbar -->
+    <nav class="side-nav">
+        <div class="nav-progress-line"></div>
+        <a href="#hero" class="nav-item active">
+            <span class="nav-dot">
+                <span class="nav-icon num-icon">01</span>
+                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            </span>
+            <span class="nav-label">Intro</span>
+        </a>
+        <a href="#about" class="nav-item">
+            <span class="nav-dot">
+                <span class="nav-icon num-icon">02</span>
+                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </span>
+            <span class="nav-label">About</span>
+        </a>
+        <a href="#skills" class="nav-item">
+            <span class="nav-dot">
+                <span class="nav-icon num-icon">03</span>
+                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            </span>
+            <span class="nav-label">Expertise</span>
+        </a>
+        <a href="#works" class="nav-item">
+            <span class="nav-dot">
+                <span class="nav-icon num-icon">04</span>
+                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </span>
+            <span class="nav-label">Works</span>
+        </a>
+        <a href="#connect" class="nav-item">
+            <span class="nav-dot">
+                <span class="nav-icon num-icon">05</span>
+                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </span>
+            <span class="nav-label">Connect</span>
+        </a>
+    </nav>
+
+    <!-- Main Content Container setup for Scroll Snap -->
+    <main class="scroll-container" id="main-content">
+
+        <!-- SECTION 1: HERO -->
+        <section id="hero" class="snap-section section-hero">
+            <div class="hero-left">
+                <div class="mono-badge fade-up-1"># SYSTEM ONLINE</div>
+                <h1 class="hero-title fade-up-2">Sanjeev<br>Parajuli.</h1>
+                <p class="hero-desc fade-up-3">I engineer robust, scalable, and visually compelling web applications.
+                    Bridging the gap between sleek design and complex backend logic.</p>
+            </div>
+            <div class="hero-right fade-in-slow">
+                <div class="abstract-shape"></div>
+            </div>
+            <div class="scroll-down">
+                <span>SCROLL DOWN</span>
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ABOUT -->
+        <section id="about" class="snap-section section-about">
+            <div class="about-container">
+                <div class="about-card reveal-card">
+                    <h2 class="section-heading">WHO AM I</h2>
+                    <p class="about-text">A seasoned software developer based in Nepal. I've spent over 3 years turning
+                        massive conceptual ideas into structured reality. I thrive inside the terminal just as much as I
+                        do creating beautiful web interfaces.</p>
+                    <div class="about-stats">
+                        <div class="stat-pill">
+                            <span class="no">03+</span>
+                            <span class="lbl">Years Coding</span>
+                        </div>
+                        <div class="stat-pill">
+                            <span class="no">20+</span>
+                            <span class="lbl">Projects Launched</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image reveal-card delay-1">
+                    <!-- Tech gradient box -->
+                    <div class="code-snippet">
+                        <code>
+                            <span class="c-purple">const</span> <span class="c-blue">Sanjeev</span> = {<br>
+                            &nbsp;&nbsp;role: <span class="c-green">'Full Stack Developer'</span>,<br>
+                            &nbsp;&nbsp;passion: <span class="c-green">'Building Systems'</span>,<br>
+                            &nbsp;&nbsp;coffee: <span class="c-purple">true</span><br>
+                            };
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SKILLS -->
+        <section id="skills" class="snap-section section-skills">
+            <h2 class="section-heading center">TECH STACK</h2>
+            <div class="skills-grid">
+
+                <div class="skill-box reveal-scale">
+                    <div class="box-icon">{' '}</div>
+                    <h3>Frontend</h3>
+                    <p>React, Next.js, Vanilla JS, HTML5, CSS3, TailwindCSS, SCSS</p>
+                </div>
+
+                <div class="skill-box reveal-scale delay-1">
+                    <div class="box-icon">⚙️</div>
+                    <h3>Backend</h3>
+                    <p>Node.js, Express, C#, .NET Core, REST APIs, GraphQL</p>
+                </div>
+
+                <div class="skill-box reveal-scale delay-2">
+                    <div class="box-icon">🗄️</div>
+                    <h3>Databases</h3>
+                    <p>SQL Server, PostgreSQL, MongoDB, Redis</p>
+                </div>
+
+                <div class="skill-box reveal-scale delay-3">
+                    <div class="box-icon">🛠️</div>
+                    <h3>DevOps & Tools</h3>
+                    <p>Git, Docker, CI/CD, Azure, Linux Environments, Figma</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: WORKS -->
+        <section id="works" class="snap-section section-works">
+            <h2 class="section-heading">FEATURED WORKS</h2>
+            <div class="works-list">
+
+                <div class="work-row reveal-slide">
+                    <div class="work-num">01.</div>
+                    <div class="work-details">
+                        <h3>ShopFlow Engine</h3>
+                        <p>A robust, high-traffic e-commerce monolithic architecture transitioned into microservices.
+                        </p>
+                        <div class="tags"><span>.NET Core</span><span>React</span><span>SQL</span></div>
+                    </div>
+                    <div class="work-visual bg-p1"></div>
+                </div>
+
+                <div class="work-row reveal-slide delay-1">
+                    <div class="work-num">02.</div>
+                    <div class="work-details">
+                        <h3>FinDash Analytics</h3>
+                        <p>Real-time data visualization dashboard handling thousands of financial transactions
+                            seamlessly.</p>
+                        <div class="tags"><span>Node.js</span><span>Chart.js</span><span>MongoDB</span></div>
+                    </div>
+                    <div class="work-visual bg-p2"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: CONNECT -->
+        <section id="connect" class="snap-section section-connect">
+            <h2 class="section-heading center">LET'S CONNECT</h2>
+            <div class="social-grid">
+                
+                <a href="#" class="social-card reveal-scale">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    <span class="social-name">LinkedIn</span>
+                </a>
+                
+                <a href="#" class="social-card reveal-scale delay-1">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    <span class="social-name">GitHub</span>
+                </a>
+                
+                <a href="#" class="social-card reveal-scale delay-2">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <span class="social-name">Facebook</span>
+                </a>
+                
+                <a href="mailto:your@email.com" class="social-card reveal-scale delay-3">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span class="social-name">Email</span>
+                </a>
+                
+            </div>
+            
+            <footer class="site-footer reveal-card delay-3">
+                <p>&copy; 2026 Sanjeev Parajuli. Crafted with modern web technologies.</p>
+            </footer>
+        </section>
+
+    </main>
+
+</body>
+
+</html>
