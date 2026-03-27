@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanjeev | Soft Dark Portfolio</title>
+    <title>Sanjeev Portfolio</title>
     <!-- New Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,232 +17,336 @@
 
 <body>
 
-    <!-- Background Ambient Orbs -->
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
-    <div class="custom-cursor-follower"></div>
-
-    <!-- Redesigned Appealing Loader -->
-    <div class="loader-overlay" id="loader">
-        <div class="loader-content">
-            <div class="loader-ring-wrapper">
-                <svg class="progress-ring" width="160" height="160">
-                    <circle class="ring-bg" stroke-width="6" fill="transparent" r="74" cx="80" cy="80" />
-                    <circle id="progress-active" class="ring-progress" stroke-width="6" fill="transparent" r="74"
-                        cx="80" cy="80" stroke-linecap="round" />
-                </svg>
-                <div class="loader-percent" id="loader-percent">0</div>
-            </div>
-            <div class="loader-text">Initializing Workspace</div>
-        </div>
+    <!-- CURSORS -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    
+    <!-- ======================= LOADER ======================= -->
+    <div id="loader">
+      <canvas id="loader-canvas"></canvas>
+      <div id="loader-content">
+        <div id="loader-name" aria-label="Sanjeev Parajuli"></div>
+        <div id="loader-tagline">Creative Developer &amp; Designer</div>
+        <div id="loader-bar-wrap"><div id="loader-bar"></div></div>
+        <div id="loader-pct" aria-live="polite">0%</div>
+      </div>
     </div>
-
-    <!-- Ambient Glass Timeline Navbar -->
-    <nav class="side-nav">
-        <div class="nav-progress-line"></div>
-        <a href="#hero" class="nav-item active">
-            <span class="nav-dot">
-                <span class="nav-icon num-icon">01</span>
-                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-            </span>
-            <span class="nav-label">Intro</span>
-        </a>
-        <a href="#about" class="nav-item">
-            <span class="nav-dot">
-                <span class="nav-icon num-icon">02</span>
-                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </span>
-            <span class="nav-label">About</span>
-        </a>
-        <a href="#skills" class="nav-item">
-            <span class="nav-dot">
-                <span class="nav-icon num-icon">03</span>
-                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-            </span>
-            <span class="nav-label">Expertise</span>
-        </a>
-        <a href="#works" class="nav-item">
-            <span class="nav-dot">
-                <span class="nav-icon num-icon">04</span>
-                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            </span>
-            <span class="nav-label">Works</span>
-        </a>
-        <a href="#connect" class="nav-item">
-            <span class="nav-dot">
-                <span class="nav-icon num-icon">05</span>
-                <svg class="nav-icon svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </span>
-            <span class="nav-label">Connect</span>
-        </a>
+    
+    <!-- ======================= PILL NAV ======================= -->
+    <nav id="pill-nav" aria-label="Section navigation">
+      <a class="pill-btn" href="#hero"         data-section="hero">Home</a>
+      <div class="pill-divider"></div>
+      <a class="pill-btn" href="#about"        data-section="about">About</a>
+      <div class="pill-divider"></div>
+      <a class="pill-btn" href="#projects"     data-section="projects">Work</a>
+      <div class="pill-divider"></div>
+      <a class="pill-btn" href="#skills"       data-section="skills">Skills</a>
+      <div class="pill-divider"></div>
+      <a class="pill-btn" href="#contact"      data-section="contact">Contact</a>
     </nav>
-
-    <!-- Main Content Container setup for Scroll Snap -->
-    <main class="scroll-container" id="main-content">
-
-        <!-- SECTION 1: HERO -->
-        <section id="hero" class="snap-section section-hero">
-            <div class="hero-left">
-                <div class="mono-badge fade-up-1"># SYSTEM ONLINE</div>
-                <h1 class="hero-title fade-up-2">Sanjeev<br>Parajuli.</h1>
-                <p class="hero-desc fade-up-3">I engineer robust, scalable, and visually compelling web applications.
-                    Bridging the gap between sleek design and complex backend logic.</p>
+    
+    <!-- ======================= HERO ======================= -->
+    <section id="hero">
+      <canvas id="canvas-mesh"></canvas>
+      <canvas id="canvas-grid"></canvas>
+      <canvas id="canvas-sparks"></canvas>
+    
+      <div class="coord coord-tl">27.7172° N / 85.3240° E</div>
+      <div class="coord coord-tr" id="hud-clock">--:--:--</div>
+      <div class="coord coord-bl">Portfolio v2.0 — 2025</div>
+      <div class="coord coord-br">Available for work ●</div>
+    
+      <div class="hero-inner">
+        <h1 class="hero-headline" id="headline"></h1>
+        <div class="hero-meta reveal" style="transition-delay:.2s">
+          <div class="hero-badge">
+            <div class="badge-dot"></div>
+            <span class="badge-text">Open to opportunities</span>
+          </div>
+          <div class="hero-roles">
+            <span id="typewriter"></span><span class="tw-cursor"></span>
+          </div>
+          <a href="#projects" class="hero-cta">
+            Explore Work
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path d="M6.5 1v11M1 6.5l5.5 5.5 5.5-5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    
+      <div class="hero-scroll">
+        <div class="scroll-track"><div class="scroll-runner"></div></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+    
+    <!-- ======================= ABOUT ======================= -->
+    <section id="about">
+      <div class="about-inner">
+        <div class="about-visual reveal">
+          <div class="about-blob">
+            <span class="about-blob-text">Me</span>
+          </div>
+        </div>
+        <div class="about-text">
+          <p class="about-label reveal">01 — About</p>
+          <h2 class="about-heading reveal" style="transition-delay:.1s">
+            I craft<br><em>experiences</em>,<br>not just code.
+          </h2>
+          <p class="about-body reveal" style="transition-delay:.2s">
+            I'm a full-stack developer and creative technologist passionate about the intersection of design and engineering. I build immersive digital experiences that are both beautiful and technically robust.
+          </p>
+          <p class="about-body reveal" style="transition-delay:.25s">
+            Based remotely, I've worked with startups and studios across the globe to ship products that people love. When I'm not pushing pixels, I'm hiking mountains, experimenting with generative art, or perfecting my espresso technique.
+          </p>
+          <div class="about-tag-row reveal" style="transition-delay:.3s">
+            <span class="tag">☕ Espresso addict</span>
+            <span class="tag">🏔 Mountain person</span>
+            <span class="tag">🎨 Generative art</span>
+            <span class="tag">🌏 Remote-first</span>
+          </div>
+          <a href="#" class="cv-btn reveal" style="transition-delay:.35s">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12h10M7 1v8M3 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Download CV
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ======================= PROJECTS ======================= -->
+    <section id="projects">
+      <div class="projects-header">
+        <h2 class="projects-title reveal">Selected<br><em>Work</em></h2>
+        <span class="projects-count reveal" style="transition-delay:.1s">02 — Projects</span>
+      </div>
+      <div class="projects-track-wrap" id="proj-track-wrap">
+        <div class="projects-track">
+    
+          <article class="proj-card pc-1" tabindex="0">
+            <div class="proj-front"><div class="proj-bg"></div>
+              <div class="proj-front-content"><p class="proj-num">001</p><h3 class="proj-name">Aether UI</h3></div>
             </div>
-            <div class="hero-right fade-in-slow">
-                <div class="abstract-shape"></div>
+            <div class="proj-back">
+              <p class="proj-back-label">Design System</p><h3 class="proj-back-title">Aether UI</h3>
+              <p class="proj-back-desc">A complete design system and component library for modern web applications, built with accessibility and performance as first principles.</p>
+              <div class="proj-stack"><span>React</span><span>TypeScript</span><span>Storybook</span><span>Figma</span></div>
+              <div class="proj-links"><a href="#" class="proj-link">↗ Live</a><a href="#" class="proj-link">⌥ GitHub</a></div>
             </div>
-            <div class="scroll-down">
-                <span>SCROLL DOWN</span>
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
+          </article>
+    
+          <article class="proj-card pc-2" tabindex="0">
+            <div class="proj-front"><div class="proj-bg"></div>
+              <div class="proj-front-content"><p class="proj-num">002</p><h3 class="proj-name">Verdant</h3></div>
             </div>
-        </section>
-
-        <!-- SECTION 2: ABOUT -->
-        <section id="about" class="snap-section section-about">
-            <div class="about-container">
-                <div class="about-card reveal-card">
-                    <h2 class="section-heading">WHO AM I</h2>
-                    <p class="about-text">A seasoned software developer based in Nepal. I've spent over 3 years turning
-                        massive conceptual ideas into structured reality. I thrive inside the terminal just as much as I
-                        do creating beautiful web interfaces.</p>
-                    <div class="about-stats">
-                        <div class="stat-pill">
-                            <span class="no">03+</span>
-                            <span class="lbl">Years Coding</span>
-                        </div>
-                        <div class="stat-pill">
-                            <span class="no">20+</span>
-                            <span class="lbl">Projects Launched</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image reveal-card delay-1">
-                    <!-- Tech gradient box -->
-                    <div class="code-snippet">
-                        <code>
-                            <span class="c-purple">const</span> <span class="c-blue">Sanjeev</span> = {<br>
-                            &nbsp;&nbsp;role: <span class="c-green">'Full Stack Developer'</span>,<br>
-                            &nbsp;&nbsp;passion: <span class="c-green">'Building Systems'</span>,<br>
-                            &nbsp;&nbsp;coffee: <span class="c-purple">true</span><br>
-                            };
-                        </code>
-                    </div>
-                </div>
+            <div class="proj-back">
+              <p class="proj-back-label">SaaS Platform</p><h3 class="proj-back-title">Verdant</h3>
+              <p class="proj-back-desc">A sustainability tracking platform for businesses, visualising carbon footprints and progress toward net-zero targets in real time.</p>
+              <div class="proj-stack"><span>Next.js</span><span>D3.js</span><span>PostgreSQL</span><span>Prisma</span></div>
+              <div class="proj-links"><a href="#" class="proj-link">↗ Live</a><a href="#" class="proj-link">⌥ GitHub</a></div>
             </div>
-        </section>
-
-        <!-- SECTION 3: SKILLS -->
-        <section id="skills" class="snap-section section-skills">
-            <h2 class="section-heading center">TECH STACK</h2>
-            <div class="skills-grid">
-
-                <div class="skill-box reveal-scale">
-                    <div class="box-icon">{' '}</div>
-                    <h3>Frontend</h3>
-                    <p>React, Next.js, Vanilla JS, HTML5, CSS3, TailwindCSS, SCSS</p>
-                </div>
-
-                <div class="skill-box reveal-scale delay-1">
-                    <div class="box-icon">⚙️</div>
-                    <h3>Backend</h3>
-                    <p>Node.js, Express, C#, .NET Core, REST APIs, GraphQL</p>
-                </div>
-
-                <div class="skill-box reveal-scale delay-2">
-                    <div class="box-icon">🗄️</div>
-                    <h3>Databases</h3>
-                    <p>SQL Server, PostgreSQL, MongoDB, Redis</p>
-                </div>
-
-                <div class="skill-box reveal-scale delay-3">
-                    <div class="box-icon">🛠️</div>
-                    <h3>DevOps & Tools</h3>
-                    <p>Git, Docker, CI/CD, Azure, Linux Environments, Figma</p>
-                </div>
-
+          </article>
+    
+          <article class="proj-card pc-3" tabindex="0">
+            <div class="proj-front"><div class="proj-bg"></div>
+              <div class="proj-front-content"><p class="proj-num">003</p><h3 class="proj-name">Ember</h3></div>
             </div>
-        </section>
-
-        <!-- SECTION 4: WORKS -->
-        <section id="works" class="snap-section section-works">
-            <h2 class="section-heading">FEATURED WORKS</h2>
-            <div class="works-list">
-
-                <div class="work-row reveal-slide">
-                    <div class="work-num">01.</div>
-                    <div class="work-details">
-                        <h3>ShopFlow Engine</h3>
-                        <p>A robust, high-traffic e-commerce monolithic architecture transitioned into microservices.
-                        </p>
-                        <div class="tags"><span>.NET Core</span><span>React</span><span>SQL</span></div>
-                    </div>
-                    <div class="work-visual bg-p1"></div>
-                </div>
-
-                <div class="work-row reveal-slide delay-1">
-                    <div class="work-num">02.</div>
-                    <div class="work-details">
-                        <h3>FinDash Analytics</h3>
-                        <p>Real-time data visualization dashboard handling thousands of financial transactions
-                            seamlessly.</p>
-                        <div class="tags"><span>Node.js</span><span>Chart.js</span><span>MongoDB</span></div>
-                    </div>
-                    <div class="work-visual bg-p2"></div>
-                </div>
-
+            <div class="proj-back">
+              <p class="proj-back-label">Mobile App</p><h3 class="proj-back-title">Ember</h3>
+              <p class="proj-back-desc">A mood-journaling app with AI-powered pattern recognition, helping users understand their emotional cycles through beautiful data visualisation.</p>
+              <div class="proj-stack"><span>React Native</span><span>TensorFlow</span><span>Firebase</span></div>
+              <div class="proj-links"><a href="#" class="proj-link">↗ App Store</a><a href="#" class="proj-link">⌥ GitHub</a></div>
             </div>
-        </section>
-
-        <!-- SECTION 5: CONNECT -->
-        <section id="connect" class="snap-section section-connect">
-            <h2 class="section-heading center">LET'S CONNECT</h2>
-            <div class="social-grid">
-                
-                <a href="#" class="social-card reveal-scale">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                        <rect x="2" y="9" width="4" height="12"></rect>
-                        <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
-                    <span class="social-name">LinkedIn</span>
-                </a>
-                
-                <a href="#" class="social-card reveal-scale delay-1">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg>
-                    <span class="social-name">GitHub</span>
-                </a>
-                
-                <a href="#" class="social-card reveal-scale delay-2">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg>
-                    <span class="social-name">Facebook</span>
-                </a>
-                
-                <a href="mailto:your@email.com" class="social-card reveal-scale delay-3">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    <span class="social-name">Email</span>
-                </a>
-                
+          </article>
+    
+          <article class="proj-card pc-4" tabindex="0">
+            <div class="proj-front"><div class="proj-bg"></div>
+              <div class="proj-front-content"><p class="proj-num">004</p><h3 class="proj-name">Polaris</h3></div>
             </div>
-            
-            <footer class="site-footer reveal-card delay-3">
-                <p>&copy; 2026 Sanjeev Parajuli. Crafted with modern web technologies.</p>
-            </footer>
-        </section>
-
-    </main>
-
-</body>
+            <div class="proj-back">
+              <p class="proj-back-label">Web App</p><h3 class="proj-back-title">Polaris</h3>
+              <p class="proj-back-desc">A collaborative roadmap tool for distributed product teams — real-time, beautifully minimal, and opinionated about what matters.</p>
+              <div class="proj-stack"><span>Vue 3</span><span>WebSockets</span><span>Node.js</span><span>Redis</span></div>
+              <div class="proj-links"><a href="#" class="proj-link">↗ Live</a><a href="#" class="proj-link">⌥ GitHub</a></div>
+            </div>
+          </article>
+    
+          <article class="proj-card pc-5" tabindex="0">
+            <div class="proj-front"><div class="proj-bg"></div>
+              <div class="proj-front-content"><p class="proj-num">005</p><h3 class="proj-name">Lumen</h3></div>
+            </div>
+            <div class="proj-back">
+              <p class="proj-back-label">Creative Tool</p><h3 class="proj-back-title">Lumen</h3>
+              <p class="proj-back-desc">A browser-based generative art studio letting anyone create stunning procedural artwork through intuitive controls, no code required.</p>
+              <div class="proj-stack"><span>Canvas API</span><span>WebGL</span><span>Svelte</span></div>
+              <div class="proj-links"><a href="#" class="proj-link">↗ Live</a><a href="#" class="proj-link">⌥ GitHub</a></div>
+            </div>
+          </article>
+    
+        </div>
+      </div>
+    </section>
+    
+    <!-- ======================= SKILLS ======================= -->
+    <section id="skills">
+      <div class="skills-inner">
+        <div class="skills-header">
+          <p class="section-label reveal">03 — Skills</p>
+          <h2 class="section-title reveal" style="transition-delay:.1s">My <em>Stack</em></h2>
+        </div>
+        <div class="skills-orbit-wrap reveal" style="transition-delay:.2s" id="orbit-wrap">
+          <div class="orbit-ring orbit-ring-1"></div>
+          <div class="orbit-ring orbit-ring-2"></div>
+          <div class="orbit-ring orbit-ring-3"></div>
+          <div class="orbit-center">My<br>Stack</div>
+        </div>
+        <div class="skills-list reveal" style="transition-delay:.3s">
+          <span class="skill-pill">React</span><span class="skill-pill">Next.js</span>
+          <span class="skill-pill">TypeScript</span><span class="skill-pill">Node.js</span>
+          <span class="skill-pill">GraphQL</span><span class="skill-pill">PostgreSQL</span>
+          <span class="skill-pill">Redis</span><span class="skill-pill">Docker</span>
+          <span class="skill-pill">Figma</span><span class="skill-pill">Three.js</span>
+          <span class="skill-pill">WebGL</span><span class="skill-pill">Python</span>
+          <span class="skill-pill">AWS</span><span class="skill-pill">Git</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ======================= EXPERIENCE ======================= -->
+    <section id="experience">
+      <div class="exp-inner">
+        <div class="exp-header">
+          <p class="section-label reveal">04 — Experience</p>
+          <h2 class="section-title reveal" style="transition-delay:.1s">My <em>Journey</em></h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-line"><div class="timeline-fill" id="tl-fill"></div></div>
+    
+          <div class="tl-item reveal">
+            <div class="tl-card">
+              <p class="tl-date">2023 — Present</p>
+              <h3 class="tl-role">Senior Frontend Engineer</h3>
+              <p class="tl-company">Acme Studio · Remote</p>
+              <ul class="tl-bullets">
+                <li>Led redesign of core product, increasing user retention by 40%</li>
+                <li>Architected design system adopted across 3 product teams</li>
+              </ul>
+            </div>
+            <div class="tl-dot"></div><div class="tl-blank"></div>
+          </div>
+    
+          <div class="tl-item reveal">
+            <div class="tl-blank"></div><div class="tl-dot"></div>
+            <div class="tl-card">
+              <p class="tl-date">2021 — 2023</p>
+              <h3 class="tl-role">Full-Stack Developer</h3>
+              <p class="tl-company">Nebula Labs · San Francisco</p>
+              <ul class="tl-bullets">
+                <li>Built real-time collaboration features serving 50k+ daily users</li>
+                <li>Reduced API response times by 60% through query optimisation</li>
+              </ul>
+            </div>
+          </div>
+    
+          <div class="tl-item reveal">
+            <div class="tl-card">
+              <p class="tl-date">2020 — 2021</p>
+              <h3 class="tl-role">Frontend Developer</h3>
+              <p class="tl-company">Prism Digital · London</p>
+              <ul class="tl-bullets">
+                <li>Delivered 12+ client projects from concept to production</li>
+                <li>Introduced automated testing, cutting bug reports by 35%</li>
+              </ul>
+            </div>
+            <div class="tl-dot"></div><div class="tl-blank"></div>
+          </div>
+    
+          <div class="tl-item reveal">
+            <div class="tl-blank"></div><div class="tl-dot"></div>
+            <div class="tl-card">
+              <p class="tl-date">2016 — 2020</p>
+              <h3 class="tl-role">BSc Computer Science</h3>
+              <p class="tl-company">University of Example · First Class Honours</p>
+              <ul class="tl-bullets">
+                <li>Specialised in HCI and distributed systems</li>
+                <li>Final-year project: ML-driven UI accessibility auditor</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ======================= TESTIMONIALS ======================= -->
+    <section id="testimonials">
+      <div class="test-inner">
+        <div class="test-text">
+          <p class="section-label reveal">05 — Testimonials</p>
+          <h2 class="section-title reveal" style="transition-delay:.1s">What <em>They</em> Say</h2>
+          <p class="test-hint reveal" style="transition-delay:.2s">Swipe cards to read more</p>
+        </div>
+        <div class="deck-wrap reveal" style="transition-delay:.15s" id="deck">
+          <div class="t-card" data-index="0">
+            <p class="t-quote">Hands-down the most talented engineer I've had the pleasure of working with. Ships fast, thinks clearly, and cares deeply about craft.</p>
+            <div class="t-meta"><div class="t-avatar">S</div><div><p class="t-name">Sarah Chen</p><p class="t-role">CTO · Acme Studio</p></div></div>
+          </div>
+          <div class="t-card" data-index="1">
+            <p class="t-quote">Rare combination of technical depth and design sensibility. Every project became something we were proud to show off.</p>
+            <div class="t-meta"><div class="t-avatar">M</div><div><p class="t-name">Marcus Osei</p><p class="t-role">Product Lead · Nebula Labs</p></div></div>
+          </div>
+          <div class="t-card" data-index="2">
+            <p class="t-quote">Delivered a complex redesign in record time with zero drama. The kind of collaborator every team needs.</p>
+            <div class="t-meta"><div class="t-avatar">A</div><div><p class="t-name">Amara Nwosu</p><p class="t-role">Founder · Verdant</p></div></div>
+          </div>
+          <div class="t-card" data-index="3">
+            <p class="t-quote">Their attention to micro-interactions and performance made a product that felt genuinely delightful to use.</p>
+            <div class="t-meta"><div class="t-avatar">L</div><div><p class="t-name">Lena Richter</p><p class="t-role">Design Director · Prism</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ======================= CONTACT ======================= -->
+    <section id="contact">
+      <div class="contact-bg-text" aria-hidden="true">Let's Talk</div>
+      <div class="contact-inner">
+        <div class="reveal">
+          <p class="section-label" style="text-align:center;margin-bottom:1rem">06 — Contact</p>
+          <h2 class="contact-heading">Got an <em>idea?</em><br>Let's build it.</h2>
+        </div>
+        <form class="contact-form reveal" style="transition-delay:.15s" id="contact-form" novalidate>
+          <div class="form-field">
+            <input type="text" id="f-name" placeholder="Name" required>
+            <label for="f-name">Name</label>
+          </div>
+          <div class="form-field">
+            <input type="email" id="f-email" placeholder="Email" required>
+            <label for="f-email">Email</label>
+          </div>
+          <div class="form-field">
+            <textarea id="f-msg" rows="4" placeholder="Message" required></textarea>
+            <label for="f-msg">Message</label>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-btn">
+            Send Message
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </form>
+        <div class="social-row reveal" style="transition-delay:.25s">
+          <a href="#" class="social-link">⌥ GitHub</a>
+          <a href="#" class="social-link">in LinkedIn</a>
+          <a href="#" class="social-link">✕ Twitter</a>
+          <a href="mailto:hello@example.com" class="social-link">✉ Email</a>
+          <a href="#" class="social-link">▶ Dribbble</a>
+        </div>
+        <p class="footer-line reveal">Designed &amp; Built by Sanjeev Parajuli · 2025</p>
+      </div>
+    </section>
+    
+    <!-- ======================= SCRIPTS ======================= -->
+    
+    </body>
 
 </html>
