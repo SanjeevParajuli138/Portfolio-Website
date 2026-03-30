@@ -303,11 +303,27 @@ function initReveal(){
 (function(){
     const wrap=document.getElementById('orbit-wrap'); if(!wrap) return;
     const size=wrap.offsetWidth;
-    const rings=[
-    {radius:.21,skills:['HTML','CSS','Git'],cls:'sn-r1'},
-    {radius:.34,skills:['React','Vue','Svelte','GSAP'],cls:'sn-r2'},
-    {radius:.47,skills:['Node','Python','SQL','Docker','AWS','Figma'],cls:'sn-r3'}
-    ];
+    const rings = [
+        {
+          radius: .21,
+          skills: ['HTML', 'CSS', 'Java Script', 'Git'],
+          cls: 'sn-r1' // Frontend core
+        },
+        {
+          radius: .34,
+          skills: ['Tailwind', 'Boots trap', 'React', 'Java', 'Spring Boot'],
+          cls: 'sn-r2' // Frameworks + Java stack
+        },
+        {
+          radius: .47,
+          skills: [
+            '.NET Core', 'ASP.NET MVC', 'Entity Frame work',
+            'Python', 'Machine Learning', 'OpenCV',
+            'SQL', 'Docker'
+          ],
+          cls: 'sn-r3' // Backend + ML + tools
+        }
+      ];
     rings.forEach(ring=>{
     const count=ring.skills.length;
     ring.skills.forEach((skill,i)=>{
