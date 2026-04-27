@@ -700,3 +700,19 @@ section { position:relative; overflow:hidden; }
   .about-blob-text {padding: 30px; }
 }
 @keyframes spin360{to{transform:rotate(360deg)}}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 9999s ease-in-out 0s;
+  caret-color: currentColor;
+}
+
+body input:-webkit-autofill,
+body textarea:-webkit-autofill {
+  -webkit-text-fill-color: #fff !important;
+}
