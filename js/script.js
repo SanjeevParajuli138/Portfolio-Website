@@ -415,23 +415,43 @@ function initReveal(){
 })();
 
 /* ============================================================
-    CONTACT FORM
-    ============================================================ */
+CONTACT FORM
+============================================================ */
 (function(){
-    const form=document.getElementById('contact-form');
-    const btn=document.getElementById('submit-btn');
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('submit-btn');
     if(!form) return;
-    form.addEventListener('submit',e=>{
-    e.preventDefault(); btn.disabled=true;
-    btn.innerHTML='Sending… <span style="display:inline-block;animation:spin360 .8s linear infinite">⌛</span>';
-    setTimeout(()=>{
-        btn.innerHTML='✓ Message Sent!'; btn.style.background='var(--gold)'; form.reset();
-        setTimeout(()=>{
-        btn.disabled=false;
-        btn.innerHTML='Send Message <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
-        btn.style.background='';
-        },1000);
-    },1800);
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+    
+        btn.disabled = true;
+        btn.innerHTML = 'Sending… ⌛';
+    
+        try {
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+    
+        if (response.ok) {
+            btn.innerHTML = '✓ Message Sent!';
+            btn.style.background = 'var(--gold)';
+            form.reset();
+        } else {
+            btn.innerHTML = '❌ Failed to send';
+        }
+    
+        } catch (error) {
+        btn.innerHTML = '❌ Error occurred';
+        }
+    
+        setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = `Send Message <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+        btn.style.background = '';
+        }, 2000);
     });
 })();
 
