@@ -430,7 +430,34 @@ function initReveal(){
         btn.disabled=false;
         btn.innerHTML='Send Message <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
         btn.style.background='';
-        },3000);
+        },1000);
     },1800);
     });
 })();
+
+/* ============================================================
+    Email Copy
+    ============================================================ */
+function copyEmail(event) {
+    event.preventDefault();
+
+    const email = "sanjeevprjl52310@gmail.com";
+
+    navigator.clipboard.writeText(email)
+      .then(() => {
+        showCopyFeedback(event.target, "✓ Copied!");
+      })
+      .catch(() => {
+        alert("Failed to copy email");
+      });
+  }
+
+  function showCopyFeedback(element, message) {
+    const originalText = element.textContent;
+
+    element.textContent = message;
+
+    setTimeout(() => {
+      element.textContent = originalText;
+    }, 2000);
+  }
