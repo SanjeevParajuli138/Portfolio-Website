@@ -1,4 +1,3 @@
-
 /* ============================================================
     CUSTOM CURSOR
     ============================================================ */
@@ -66,9 +65,7 @@ document.querySelectorAll('a,button,.proj-card,.skill-pill,.t-card,.skill-node')
         loader.addEventListener('animationend',()=>{
             loader.style.display='none';
             cancelAnimationFrame(animId);
-            initAuroraMesh();
-            initPerspGrid();
-            initSparks();
+            initBackground();
             initReveal();
         },{once:true});
         },400);
@@ -91,7 +88,7 @@ updateClock(); setInterval(updateClock,1000);
     ============================================================ */
 (function(){
     const el=document.getElementById('headline');
-    const words=['Building','Digital ','Beautiful.'];
+    const words=['Crafting','Digital','Experiences.'];
     let delay=0.08;
     const line1=document.createElement('div');
     const line2=document.createElement('div');
@@ -481,3 +478,252 @@ function copyEmail(event) {
       element.textContent = originalText;
     }, 2000);
   }
+
+  function initBackground(){
+    const canvas=document.getElementById('canvas-bg');
+    const ctx=canvas.getContext('2d');
+    let W,H,t=0,mx=0.5,my=0.5,tmx=0.5,tmy=0.5;
+  
+    function resize(){
+      W=canvas.width=canvas.offsetWidth;
+      H=canvas.height=canvas.offsetHeight;
+      buildGrain(); initFlowField();
+    }
+  
+    let grain;
+    function buildGrain(){
+      grain=document.createElement('canvas');
+      grain.width=grain.height=300;
+      const g=grain.getContext('2d');
+      const id=g.createImageData(300,300);
+      for(let i=0;i<id.data.length;i+=4){
+        const v=Math.random()*255|0;
+        id.data[i]=id.data[i+1]=id.data[i+2]=v; id.data[i+3]=20;
+      }
+      g.putImageData(id,0,0);
+    }
+  
+    document.addEventListener('mousemove',e=>{
+      tmx=e.clientX/window.innerWidth; tmy=e.clientY/window.innerHeight;
+    });
+  
+    /* ── FLOW FIELD ── */
+    const FLOW_COUNT=window.innerWidth<600?160:320;
+    let flowParticles=[];
+  
+    function fieldAngle(x,y,t){
+      const nx=x/W,ny=y/H;
+      return(
+        Math.sin(nx*4.2+t*0.55)*Math.cos(ny*3.1-t*0.40)*Math.PI*1.8+
+        Math.sin(nx*2.1-ny*3.4+t*0.30)*Math.PI*0.9+
+        Math.cos(nx*6.0*Math.sin(t*0.08)+ny*5.0+t*0.20)*Math.PI*0.6
+      );
+    }
+  
+    function resetParticle(p){
+      p.x=Math.random()*W; p.y=Math.random()*H;
+      p.age=0; p.maxAge=80+Math.random()*180;
+      p.speed=0.55+Math.random()*1.1;
+      p.width=0.3+Math.random()*0.9;
+      const pal=[[201,168,76],[180,160,130],[220,210,195],[160,130,90],[140,120,80]];
+      p.rgb=pal[Math.floor(Math.random()*pal.length)];
+      p.px=p.x; p.py=p.y; return p;
+    }
+  
+    function initFlowField(){
+      flowParticles=Array.from({length:FLOW_COUNT},()=>resetParticle({}));
+    }
+  
+    function stepFlow(){
+      flowParticles.forEach(p=>{
+        p.px=p.x; p.py=p.y;
+        const a=fieldAngle(p.x,p.y,t);
+        const dx=p.x-mx*W,dy=p.y-my*H;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        const repel=dist<120?((120-dist)/120)*2.2:0;
+        p.x+=Math.cos(a)*p.speed+(dist>1?dx/dist*repel:0)*0.4;
+        p.y+=Math.sin(a)*p.speed+(dist>1?dy/dist*repel:0)*0.4;
+        p.age++;
+        if(p.age>p.maxAge||p.x<0||p.x>W||p.y<0||p.y>H) resetParticle(p);
+      });
+    }
+  
+    function drawFlow(){
+      flowParticles.forEach(p=>{
+        const life=p.age/p.maxAge;
+        const alpha=Math.sin(life*Math.PI)*0.38;
+        ctx.strokeStyle=`rgba(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]},${alpha})`;
+        ctx.lineWidth=p.width;
+        ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(p.x,p.y); ctx.stroke();
+      });
+    }
+  
+    /* ── ORBITING RINGS ── */
+    const rings=[
+      {speed:0.0018,phase:0,    tilt:0.32,rx:0.30,ry:0.10,alpha:0.18,lw:0.8},
+      {speed:-0.0012,phase:2.1, tilt:0.58,rx:0.36,ry:0.13,alpha:0.12,lw:0.6},
+      {speed:0.0009,phase:4.2,  tilt:0.78,rx:0.44,ry:0.08,alpha:0.10,lw:0.5},
+      {speed:-0.0022,phase:1.05,tilt:0.20,rx:0.24,ry:0.16,alpha:0.14,lw:0.7},
+    ];
+  
+    function drawRings(){
+      const cx=W*0.5,cy=H*0.45;
+      rings.forEach(r=>{
+        const angle=t*r.speed*60+r.phase;
+        ctx.save();
+        ctx.translate(cx,cy); ctx.rotate(angle); ctx.scale(1,r.tilt);
+        ctx.beginPath();
+        ctx.ellipse(0,0,r.rx*Math.min(W,H),r.ry*Math.min(W,H),0,0,Math.PI*2);
+        ctx.strokeStyle=`rgba(201,168,76,${r.alpha+0.06*Math.sin(t*0.4+r.phase)})`;
+        ctx.lineWidth=r.lw; ctx.stroke();
+        for(let i=0;i<12;i++){
+          const a=(i/12)*Math.PI*2;
+          const rx2=r.rx*Math.min(W,H),ry2=r.ry*Math.min(W,H);
+          ctx.strokeStyle=`rgba(201,168,76,${r.alpha*1.5})`;
+          ctx.lineWidth=0.5;
+          ctx.beginPath();
+          ctx.moveTo(Math.cos(a)*rx2,Math.sin(a)*ry2);
+          ctx.lineTo(Math.cos(a)*(rx2-5),Math.sin(a)*(ry2-5));
+          ctx.stroke();
+        }
+        ctx.restore();
+      });
+    }
+  
+    /* ── CONSTELLATION ── */
+    const NODES=55;
+    const nodes=Array.from({length:NODES},()=>({
+      x:Math.random(),y:Math.random(),
+      vx:(Math.random()-.5)*0.00025,vy:(Math.random()-.5)*0.00018,
+      r:0.8+Math.random()*1.8,a:0.15+Math.random()*0.45,
+    }));
+  
+    function drawConstellation(){
+      const maxDist=0.18;
+      nodes.forEach(n=>{
+        n.x+=n.vx; n.y+=n.vy;
+        if(n.x<0||n.x>1)n.vx*=-1; if(n.y<0||n.y>1)n.vy*=-1;
+      });
+      for(let i=0;i<NODES;i++){
+        for(let j=i+1;j<NODES;j++){
+          const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+          const d=Math.sqrt(dx*dx+dy*dy);
+          if(d<maxDist){
+            ctx.strokeStyle=`rgba(180,155,90,${(1-d/maxDist)*0.14})`;
+            ctx.lineWidth=0.5;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x*W,nodes[i].y*H);
+            ctx.lineTo(nodes[j].x*W,nodes[j].y*H); ctx.stroke();
+          }
+        }
+      }
+      nodes.forEach(n=>{
+        ctx.fillStyle=`rgba(201,168,76,${n.a})`;
+        ctx.beginPath(); ctx.arc(n.x*W,n.y*H,n.r,0,Math.PI*2); ctx.fill();
+      });
+    }
+  
+    /* ── RIPPLES ── */
+    const ripples=[];
+    let rippleTimer=0;
+  
+    function spawnRipple(){
+      ripples.push({
+        x:0.15+Math.random()*0.7,y:0.15+Math.random()*0.7,
+        r:0,maxR:0.3+Math.random()*0.25,
+        speed:0.0018+Math.random()*0.0014,alpha:0.22,
+      });
+    }
+  
+    function drawRipples(){
+      rippleTimer++;
+      if(rippleTimer>90+Math.random()*60){rippleTimer=0;spawnRipple();}
+      for(let i=ripples.length-1;i>=0;i--){
+        const rp=ripples[i];
+        rp.r+=rp.speed; rp.alpha=0.22*(1-rp.r/rp.maxR);
+        if(rp.r>rp.maxR){ripples.splice(i,1);continue;}
+        const radius=rp.r*Math.min(W,H);
+        ctx.strokeStyle=`rgba(201,168,76,${rp.alpha})`;
+        ctx.lineWidth=0.8;
+        ctx.beginPath(); ctx.arc(rp.x*W,rp.y*H,radius,0,Math.PI*2); ctx.stroke();
+        if(rp.r>0.03){
+          ctx.strokeStyle=`rgba(220,200,150,${rp.alpha*0.4})`;
+          ctx.lineWidth=0.4;
+          ctx.beginPath(); ctx.arc(rp.x*W,rp.y*H,radius*0.7,0,Math.PI*2); ctx.stroke();
+        }
+      }
+    }
+  
+    /* ── STREAKS ── */
+    const streaks=[];
+    let streakTimer=0;
+  
+    function spawnStreak(){
+      const side=Math.random()<0.5;
+      streaks.push({
+        x:side?-0.05:1.05, y:0.1+Math.random()*0.8,
+        vx:(side?1:-1)*(0.008+Math.random()*0.014),
+        vy:(Math.random()-.5)*0.004,
+        len:0.06+Math.random()*0.12,
+        alpha:0.5+Math.random()*0.4,
+        width:0.4+Math.random()*0.7,
+      });
+    }
+  
+    function drawStreaks(){
+      streakTimer++;
+      if(streakTimer>35+Math.random()*40){streakTimer=0;spawnStreak();}
+      for(let i=streaks.length-1;i>=0;i--){
+        const s=streaks[i];
+        s.x+=s.vx; s.y+=s.vy;
+        if(s.x<-0.2||s.x>1.2){streaks.splice(i,1);continue;}
+        const x1=s.x*W,y1=s.y*H;
+        const x2=(s.x-s.len)*W,y2=y1;
+        const g=ctx.createLinearGradient(x2,y2,x1,y1);
+        g.addColorStop(0,'rgba(220,200,160,0)');
+        g.addColorStop(1,`rgba(240,220,180,${s.alpha})`);
+        ctx.strokeStyle=g; ctx.lineWidth=s.width;
+        ctx.beginPath(); ctx.moveTo(x2,y2); ctx.lineTo(x1,y1); ctx.stroke();
+        ctx.fillStyle=`rgba(255,240,200,${s.alpha*0.9})`;
+        ctx.beginPath(); ctx.arc(x1,y1,s.width*1.2,0,Math.PI*2); ctx.fill();
+      }
+    }
+  
+    /* ── VIGNETTE ── */
+    function drawVignette(){
+      const pulse=0.04*Math.sin(t*0.9);
+      const g=ctx.createRadialGradient(W/2,H/2,W*0.1,W/2,H/2,W*0.78);
+      g.addColorStop(0,'rgba(0,0,0,0)');
+      g.addColorStop(0.5,'rgba(4,3,10,0.15)');
+      g.addColorStop(1,`rgba(4,3,10,${0.72+pulse})`);
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    }
+  
+    function drawGrain(){
+      if(!grain)return;
+      ctx.save(); ctx.globalAlpha=0.025;
+      ctx.globalCompositeOperation='overlay';
+      ctx.fillStyle=ctx.createPattern(grain,'repeat');
+      ctx.fillRect(0,0,W,H); ctx.restore();
+    }
+  
+    function draw(){
+      t+=0.012;
+      mx+=(tmx-mx)*0.05; my+=(tmy-my)*0.05;
+      ctx.fillStyle='rgba(4,3,10,0.18)'; ctx.fillRect(0,0,W,H);
+      stepFlow(); drawFlow();
+      drawConstellation();
+      drawRipples();
+      drawRings();
+      drawStreaks();
+      drawVignette();
+      drawGrain();
+      requestAnimationFrame(draw);
+    }
+  
+    ctx.fillStyle='#04030a'; ctx.fillRect(0,0,W,H);
+    resize();
+    window.addEventListener('resize',resize);
+    spawnRipple(); spawnRipple();
+    draw();
+  } 
