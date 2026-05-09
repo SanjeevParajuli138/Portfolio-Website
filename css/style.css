@@ -722,7 +722,9 @@ section { position:relative; overflow:hidden; }
   .proj-card.tapped .proj-front { transform:rotateY(-180deg); }
   .proj-card.tapped .proj-back  { transform:rotateY(0deg); }
   .skills-orbit-wrap { width:90vw; height:90vw; }
-  .coord { display:none; }
+  .coord-bl { display:none; }
+  .coord-br { margin-bottom: 15px; }
+
 }
 @media(max-width:480px) {
   #cursor-dot,#cursor-ring { display:none; }
