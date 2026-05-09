@@ -1,8 +1,22 @@
-🌐 Portfolio Website
+# 🌐 Personal Portfolio Website
 
-A personal portfolio website built using HTML, CSS, and JavaScript to showcase my skills, projects, and contact information in a clean and responsive design.
+![GitHub last commit](https://img.shields.io/github/last-commit/your-username/portfolio-website)
+![GitHub repo size](https://img.shields.io/github/repo-size/your-username/portfolio-website)
+![GitHub stars](https://img.shields.io/github/stars/your-username/portfolio-website?style=social)
 
-📁 Project Structure
+---
+
+## 🚀 About the Project
+
+This is my personal **portfolio website** built using **HTML, CSS, and JavaScript**.  
+It showcases my skills, projects, and contact information in a clean, responsive, and modern design.
+
+The goal of this project is to present myself professionally as a developer and make it easy for recruiters or clients to learn about my work.
+
+---
+
+## 📁 Project Structure
+
 Portfolio-Website/
 │
 ├── assets/        # Images, icons, and media files
@@ -11,45 +25,81 @@ Portfolio-Website/
 ├── CNAME          # Custom domain configuration (GitHub Pages)
 └── index.html     # Main landing page
 
-🚀 Features
-Fully responsive design (mobile + desktop friendly)
-Smooth navigation and scrolling experience
-Clean and modern UI layout
-Dedicated sections for:
-About Me
-Skills
-Projects
-Contact
-Lightweight and fast loading
-Deployed using GitHub Pages (if applicable)
-🛠️ Built With
-HTML5
-CSS3
-JavaScript (Vanilla JS)
-GitHub Pages (for deployment)
+---
 
-🌍 Live Demo
+## ✨ Features
 
-👉 Click here to view live website
+- 📱 Fully responsive design (mobile, tablet, desktop)
+- 🎨 Modern and clean UI/UX
+- ⚡ Fast loading static website
+- 🧭 Smooth scrolling navigation
+- 🧑 About Me section
+- 💼 Projects showcase section
+- 🛠 Skills display section
+- 📬 Contact section
+- 🌐 Hosted using GitHub Pages
 
+---
+
+## 🛠️ Built With
+
+- HTML5
+- CSS3
+- JavaScript (Vanilla JS)
+- GitHub Pages
+
+---
+
+## 🌍 Live Demo
+
+👉 Replace with your live link:  
 https://parajulisanjeev.com.np/
 
+---
 
 assets/preview.png
-⚙️ How to Run Locally
 
-Clone the repository:
+---
 
+## ⚙️ How to Run Locally
+
+```bash
 git clone https://github.com/SanjeevParajuli138/Portfolio-Website
-
-Navigate to project folder:
-
 cd Portfolio-Website
-Open index.html in your browser.
+
+Then simply open:
+
+index.html in your browser.
 
 No additional setup required.
 
 📬 Contact
-Email: sanjeevprjl52310@gmail.com
-LinkedIn: https://linkedin.com/in/sanjeev-parajuli-a4a3852b3/
-GitHub: https://github.com/sanjeevparajuli138
+📧 Email: sanjeevprjl52310@gmail.com
+🔗 LinkedIn: https://linkedin.com/in/sanjeev-parajuli-a4a3852b3/
+💻 GitHub: https://github.com/sanjeevparajuli138
+
+📌 Notes
+- This is a static website (no backend required)
+- Fully customizable via HTML/CSS/JS
+- Easy to deploy on GitHub Pages
+
+🚀 Deployment
+
+This project is deployed using GitHub Pages.
+
+To deploy your own version:
+
+- Go to repository settings
+- Enable GitHub Pages
+- Select main branch
+- Save
+
+📌 Future Improvements
+1. 🌙 Dark/Light mode toggle
+2. ✨ Animations and transitions upgrade
+3. 🧠 Add blog section
+4. ⚛️ Convert into React-based portfolio
+
+🙌 Thank You
+
+If you like this project, feel free to ⭐ the repository!
